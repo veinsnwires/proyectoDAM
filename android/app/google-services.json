@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "747220267434",
+    "project_id": "dam-2025-tinf",
+    "storage_bucket": "dam-2025-tinf.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:747220267434:android:92aabf8bf4086f82f13bd3",
+        "android_client_info": {
+          "package_name": "com.example.eventos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "747220267434-cjmgnkeg7sdvevfm0ffk48d3jtj8sm3l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.eventos",
+            "certificate_hash": "00186f87d23629942a5bb2cf2a14beb71d2e0913"
+          }
+        },
+        {
+          "client_id": "747220267434-h6ju7rikiogrnbpk8me3thq1820pge6t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQxVbl4aG12R5a43k36CtDDVKsvzR2Jmk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "747220267434-h6ju7rikiogrnbpk8me3thq1820pge6t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
