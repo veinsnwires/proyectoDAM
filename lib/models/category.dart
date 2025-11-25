@@ -15,7 +15,7 @@ class Category {
       id: documentId,
       name: data['name'] ?? 'Unnamed',
       // We assume the DB stores just the filename (e.g., "poke4.jpg")
-      imagePath: 'assets/images/${data['photo'] ?? 'poke6.jpg'}',
+      imagePath: 'assets/images/${data['photo'] ?? 'default.jpg'}',
     );
   }
 }

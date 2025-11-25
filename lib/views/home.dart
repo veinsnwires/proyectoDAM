@@ -1,3 +1,4 @@
+import 'package:eventos/views/new_event_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -87,12 +88,13 @@ class _HomeState extends State<Home> {
                 final event = Event.fromFirestore(doc);
 
                 // Asignamos imagen manual según categoría (luego lo mejoraremos)
-                String cardImage = 'assets/images/poke4.jpg';
+                String cardImage = 'assets/images/coloquio.jpg';
+
                 if (event.category == 'Charla') {
-                  cardImage = 'assets/images/poke3.jpg';
+                  cardImage = 'assets/images/charla.jpg';
                 }
                 if (event.category == 'Workshop') {
-                  cardImage = 'assets/images/poke5.jpg';
+                  cardImage = 'assets/images/workshop.jpg';
                 }
 
                 return EventCard(
@@ -101,14 +103,24 @@ class _HomeState extends State<Home> {
                   lugar: event.location,
                   categoria: event.category,
                   imagePath: cardImage,
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EventDetailScreen(
-                            event: event), // Pasamos el evento completo
-                      ),
-                    );
+                  onTap: () async {
+                    try {
+                      print('Event ID: ${event.id}');
+                      print('Event Title: ${event.title}');
+                      print('Event Category: ${event.category}');
+
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EventDetailScreen(event: event),
+                        ),
+                      );
+                    } catch (e) {
+                      print('Error navegando: $e');
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Error: $e')),
+                      );
+                    }
                   },
                 );
               },
@@ -120,10 +132,13 @@ class _HomeState extends State<Home> {
       // BOTÓN FLOTANTE (Sin navegación aún)
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          debugPrint("Ir a crear evento (Próximamente)");
+          final route =
+              MaterialPageRoute(builder: (context) => const AddEventScreen());
+          Navigator.push(context, route);
         },
         child: const Icon(Icons.add),
       ),
     );
   }
 }
+//xd

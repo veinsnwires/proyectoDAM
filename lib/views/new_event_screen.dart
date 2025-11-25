@@ -1,3 +1,4 @@
+import 'package:eventos/services/firestore_service.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,7 +25,24 @@ class _AddEventScreenState extends State<AddEventScreen> {
   bool _isLoading = false;
 
   // Las opciones fijas del requerimiento
-  final List<String> _categories = ['Charla', 'Coloquio', 'Workshop'];
+  final FirestoreService _firestoreService = FirestoreService();
+  List<String> _categories = [];
+  @override
+  void initState() {
+    super.initState();
+    _loadCategories();
+  }
+
+  void _loadCategories() async {
+    final loadedCategories = await _firestoreService.getCategoryNames();
+    setState(() {
+      _categories = loadedCategories;
+      // Aseguramos que la categoría seleccionada por defecto sea la primera cargada
+      if (_categories.isNotEmpty) {
+        _selectedCategory = _categories.first;
+      }
+    });
+  }
 
   // Función para seleccionar Fecha y Hora
   Future<void> _pickDateTime() async {
@@ -117,7 +135,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
           // FONDO: Mapa Pokemon
           Positioned.fill(
             child: Image.asset(
-              "assets/images/poke5.jpg", // Asegúrate de tener esta imagen
+              "assets/images/new.jpg", // Asegúrate de tener esta imagen
               fit: BoxFit.cover,
             ),
           ),
@@ -181,6 +199,8 @@ class _AddEventScreenState extends State<AddEventScreen> {
                           }).toList(),
                           onChanged: (value) =>
                               setState(() => _selectedCategory = value!),
+                          validator: (value) =>
+                              value == null ? "Seleccione una categoría" : null,
                         ),
                         const SizedBox(height: 16),
 
